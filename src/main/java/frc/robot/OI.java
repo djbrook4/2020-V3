@@ -41,6 +41,7 @@ public class OI {
   public Button PivotDown = new JoystickButton(_operator, 3);
   public Button ElevatorUp = new JoystickButton(_operator, 6);
   public Button ElevatorDown = new JoystickButton(_operator, 4);
+  public Button ShootFull = new JoystickButton(_operator, 12);
 
   public Button IntakeIn = new JoystickButton(_operator, 9);
   public Button IntakeOut = new JoystickButton(_operator, 10);
@@ -57,6 +58,7 @@ public class OI {
     ShootL.whileHeld(new ShooterButton(-.20));
     ShootT.whileHeld(new ShooterButton(-.67));
     ShootF.whileHeld(new ShooterButton(-.75));
+    ShootFull.whileHeld(new ShooterButton(-1));
 
     IntakeIn.whileHeld(new IndexCmd(.75));
     intakeInDriver.whileHeld(new IntakeCmd(1));
