@@ -58,14 +58,18 @@ public class RobotMap {
   public static final int LED_STRING_LENGTH = 300;  //set to whatever the strand ends up being
   public static final int LED_PWM = 8;  //PWM
 
+
+
   //Lemon light stuf
   public static final double KNOWN_DISTANCE = 161.3; //inches
   public static final int PIXEL_WIDTH_KNOWN = 65; //pixels
   public static final double KNOWN_TAPE_BOUND_WIDTH = 39.25; //inches
   public static final double FOCAL_LENGTH = ( KNOWN_DISTANCE * PIXEL_WIDTH_KNOWN) / KNOWN_TAPE_BOUND_WIDTH;
+
+
   public static final double GEAR_RATIO = 10.7/1.0;
 
-  public static final double kTurnP = 1;
+  public static final double kTurnP = .25;
   public static final double kTurnI = 0;
   public static final double kTurnD = 0;
   public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048; //inches

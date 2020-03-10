@@ -11,14 +11,18 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import frc.robot.utils.Limelight;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ArcadeDrive extends Command {
+public class TurnToPort extends Command {
   public static OI m_oi;
   public static Boolean reverse;
-  public ArcadeDrive() {
+  public TurnToPort() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveSub);
   }
@@ -34,40 +38,26 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println("aracde command");
-    double forward = 1 * Robot.m_oi._driver.getY();
-    double turn = Robot.m_oi._driver.getTwist();
-    boolean driveslow = Robot.m_oi._driver.getRawButton(1);
-    boolean driveReverse = Robot.m_oi._driver.getRawButton(2);
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry tx = table.getEntry("tx");
+    NetworkTableEntry ty = table.getEntry("ty");
+    NetworkTableEntry ta = table.getEntry("ta");
+    NetworkTableEntry tlong = table.getEntry("tlong");
 
-    /*if(Robot.m_oi._driver.getRawButton(11) && reverse == false){
-      reverse = true;
-    }
-    else if(Robot.m_oi._driver.getRawButton(11) && reverse == true){
-      reverse = false;
-    }*/
-    
-    if (driveslow) {
-      //slow down inputs for better control
-      if(forward > .45) forward=.45;
-      if(forward < -.45) forward=-.45;
-      if(turn > .45) turn=.35;
-      if(turn < -.45) turn=-.35;
+    //read values periodically
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+    double schlong = tlong.getDouble(0.0);
 
-    } else  {
-      //leave inputs be and don't adjust
-     // if(turn > .45) turn=turn/2;
-     // if(turn < -.45) turn=-(turn/2);
-
-    }
-
-    if (driveReverse) {
-      forward = forward * -1;
-      turn = turn * 1;
-    }
+    double forward = 0;
+    double turn = 0;
+  
+    turn = RobotMap.kTurnP*(x/10);
+        
     
 
-    Robot.driveSub.arcadeDrive(forward*.90, turn*.55, false);
+    Robot.driveSub.arcadeDrive(forward, turn, false);
    // if(reverse == false){
      // Robot.driveSub.arcadeDrive(forward, turn);
     //}
