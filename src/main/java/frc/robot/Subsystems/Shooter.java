@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.RobotMap;
 import frc.robot.Commands.*;
 
@@ -27,7 +28,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 public class Shooter extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    CANSparkMax VictorSPX = new CANSparkMax(RobotMap.SHOOTER, MotorType.kBrushless);
+    WPI_VictorSPX VictorSPX = new WPI_VictorSPX(RobotMap.SHOOTER);
     
 
     public Shooter() {
